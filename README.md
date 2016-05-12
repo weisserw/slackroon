@@ -10,30 +10,31 @@ Then create config.json file in the same directory as the sources. It should loo
 
 ```
 {
-	"token": "<SLACK TOKEN>",
-	"erruser": "<Username to send errors to>",
-	"twitter": {
-		"consumer_key": "XXX",
-		"consumer_secret": "XXX",
-		"access_token": "XXX",
-		"access_token_secret": "XXX"
-	},
-	"weather": {
-		"key": "<wunderground api key>"
-	},
-	"weight": {
-		"users": {
-			"someone": {
-				"type": "fitbit",
-				"userid": "XXX"
-			},
-			"someoneelse": {
-				"type": "withings",
-				"userid": "XXX",
-				"publickey": "XXX"
-			}
-		}
-	}
+    "token": "<SLACK TOKEN>",
+        "erruser": "<Username to send errors to>",
+        "twitter": {
+            "consumer_key": "XXX",
+            "consumer_secret": "XXX",
+            "access_token": "XXX",
+            "access_token_secret": "XXX",
+            "yahoo_appid": "<app id for yahoo Geo API>"
+        },
+        "weather": {
+            "key": "<wunderground api key>"
+        },
+        "weight": {
+            "users": {
+                "someone": {
+                    "type": "fitbit",
+                    "userid": "XXX"
+                },
+                "someoneelse": {
+                    "type": "withings",
+                    "userid": "XXX",
+                    "publickey": "XXX"
+                }
+            }
+        }
 }
 ```
 

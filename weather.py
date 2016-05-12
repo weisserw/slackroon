@@ -7,13 +7,12 @@ import json
 
 from config import conf
  
-@listen_to(r'!w\s+([0-9]{5})')
+@listen_to(r'^!w\s+([0-9]{5})')
 def weather(message, zipcode):
     w = getweather(zipcode)
     message.send_webapi('', json.dumps([{
         'fallback': w,
-        'title': w,
-        'title_link': 'https://www.wunderground.com/cgi-bin/findweather/getForecast?query=' + zipcode
+        'text': "<https://www.wunderground.com/cgi-bin/findweather/getForecast?query=%s|%s>" % (zipcode, w),
     }]))
 
 def getweather(zipcode):

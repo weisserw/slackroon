@@ -6,7 +6,7 @@ import urllib2
 
 from config import conf
 
-@listen_to(r'!wi\s+(.*)')
+@listen_to(r'^!wi\s+(.*)')
 def do_weight(msg, user):
 	s = None
 	user = user.strip()

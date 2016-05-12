@@ -6,27 +6,27 @@ import urllib2
 
 from config import conf
 
-@listen_to(r'!wiki\s+(.*)')
+@listen_to(r'^!wiki\s+(.*)')
 def wikipedia(message, title):
     # replace spaces with underscores and capitalize first letter of each word in title per wikipedia being an ass
     title = str.replace(title, ' ', '_').title()
     e = getExtract(title)
-    if e == None:
+    if e is None:
         results = search(title)
-        if results == None:
-            message.send('No article found.')
+        if results is None or len(results) == 0:
+            message.send('No articles found.')
         else:
-            for result in results:
+            title = results[0]
+            e = getExtract(results[0])
+            if e is None:
                 message.send_webapi('', json.dumps([{
                     'fallback': result,
-                    'title': result,
-                    'title_link': 'https://en.wikipedia.org/wiki/' + result.replace(' ', '_')
-        }])) 
-    else:
+                    'text': '<https://en.wikipedia.org/wiki/%s|%s>' % (result.replace(' ', '_'), result)
+                } for result in results]))
+    if e is not None:
         message.send_webapi('', json.dumps([{
             'fallback': e,
-            'title': e,
-            'title_link': 'https://en.wikipedia.org/wiki/' + title.replace(' ', '_')
+            'text': '<https://en.wikipedia.org/wiki/%s|%s>' % (title.replace(' ', '_'), e)
         }]))
 
 def getExtract(title):
