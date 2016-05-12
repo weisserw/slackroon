@@ -71,5 +71,5 @@ def search(title):
     for result in results:
         titles.append(result['title'])
     
-    # 5 top results seems like enough
-    return titles[:5]
+    # 3 top results seems like enough
+    return titles[:3]
