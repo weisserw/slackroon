@@ -10,4 +10,5 @@ PLUGINS = [
 	'twitter',
 	'weather',
 	'weight',
+	'wikipedia',
 ]
