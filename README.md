@@ -4,11 +4,12 @@ We do it big.
 
 To run this you need to install the requirements:
 
-  % pip install -r pip.requirements
+`% pip install -r pip.requirements`
 
 Then create config.json file in the same directory as the sources. It should look something like:
 
-  {
+```
+{
 	"token": "<SLACK TOKEN>",
 	"erruser": "<Username to send errors to>",
 	"twitter": {
@@ -33,8 +34,9 @@ Then create config.json file in the same directory as the sources. It should loo
 			}
 		}
 	}
-  }
+}
+```
 
 Finally, you can execute:
 
-  % python run.py
+`% python run.py`
