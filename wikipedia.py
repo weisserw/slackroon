@@ -45,8 +45,8 @@ def getExtract(title):
     
     extract = pages[pages.keys()[0]]['extract']
     
-    # if there are multiple reults the extract will just contain the term plus "may refer to""
-    if extract.find('may refer to:') != -1:
+    # empty extract or if there are multiple reults the extract will just contain the term plus "may refer to""
+    if (not extract) or (extract.find('may refer to:') != -1):
         return None
     
     if len(extract) == 200:
