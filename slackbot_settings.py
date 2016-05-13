@@ -7,8 +7,9 @@ DEFAULT_REPLY = 'Sobweh...'
 ERRORS_TO = conf['erruser']
 
 PLUGINS = [
-	'roontwitter',
-	'weather',
-	'weight',
-	'wikipedia',
+    'roontwitter',
+    'rottentomatoes',
+    'weather',
+    'weight',
+    'wikipedia',
 ]

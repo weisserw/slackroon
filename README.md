@@ -19,6 +19,9 @@ Then create config.json file in the same directory as the sources. It should loo
             "access_token_secret": "XXX",
             "yahoo_appid": "<app id for yahoo Geo API>"
         },
+        "rottentomatoes": {
+            "apikey": "XXX"
+        },
         "weather": {
             "key": "<wunderground api key>"
         },
