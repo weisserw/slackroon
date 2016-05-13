@@ -38,13 +38,13 @@ def get_movies(num, search, year):
     if year is not None:
         year = int(year)
 
-    return parse_movies(num, movies, year)
+    return parse_movies(num, movies, year, True)
 
 def dvd():
     movies = json.loads(urllib2.urlopen("http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=%s&page_limit=5" % (conf['rottentomatoes']['apikey'],)).read())['movies']
     return parse_movies(5, movies, None)
 
-def parse_movies(num, movies, year):
+def parse_movies(num, movies, year, detailed=False):
     if not len(movies):
         return 'No results.'
 
@@ -76,18 +76,23 @@ def parse_movies(num, movies, year):
             consensus = ": %s" % consensus
         if runtime:
             runtime = '%sm' % runtime
-        if rating and rating != 'Unrated':
-            rating = 'Rated %s' % rating
+
+        desc = ''
+        if detailed:
+            desc = '\n' + synopsis
+            if len(desc) > 250:
+                desc = desc[:247] + '...'
         ret.append({
-            'fallback': "%s (%s) %s %s %s/%s%s" % (title, y, rating, runtime, critic, aud, consensus),
-            'text': "%s %s %s/%s%s" % (rating, runtime, critic, aud, consensus),
+            'fallback': "%s (%s) %s %s %s/%s%s%s" % (title, y, rating, runtime, critic, aud, consensus, desc),
+            'text': "%s %s %s/%s%s%s" % (rating, runtime, critic, aud, consensus, desc),
             'title': "%s (%s)" % (title, y),
             'title_link': lnk,
         })
-        if img is not None:
-            ret[-1]['image_url'] = img
-        if thumb is not None:
-            ret[-1]['thumb_url'] = thumb
+        if detailed:
+            if img is not None:
+                ret[-1]['image_url'] = img
+            if thumb is not None:
+                ret[-1]['thumb_url'] = thumb
         if len(ret) >= num:
             break
     if not len(ret):
