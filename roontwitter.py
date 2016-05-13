@@ -47,7 +47,7 @@ def do_trends(msg, loc):
             break
     msg.send_webapi('', json.dumps([{
         'fallback': " ".join(names),
-        'text': " ".join("<https://twitter.com/search?q=%s|%s>" % (n, n) for n in names)
+        'text': " ".join("<https://twitter.com/search?q=%s|%s>" % (n.replace('#', '%23'), n) for n in names)
     }]))
 
 @listen_to(r'^!t(u{1,3})\s+(.*)')
